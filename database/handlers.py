@@ -1,4 +1,4 @@
-from models.database import SessionLocal
+from database.database import SessionLocal
 
 # context manager to handle database connections
 class DbHandler:

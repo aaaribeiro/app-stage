@@ -5,8 +5,9 @@ from fastapi import FastAPI #, Depends, HTTPException, status ,Form
 # from fastapi.security import APIKeyHeader
 
 # required imports from models package
-from models import models
-from models.database import engine
+from database import models
+# from database.handlers import get_db
+from database.database import engine
 # from models import crud
 
 # required imports from package utils 
@@ -14,8 +15,9 @@ from models.database import engine
 # from sqlalchemy.orm import Session
 
 # required imports from utils package
+from routers import agents
 # from routers import agents, appointments, listeners, organizations, tickets, users
-from routers import tickets
+# from routers import tickets
 # from auth import auth
 
 ################## constants ####################
@@ -25,10 +27,7 @@ PREFIX = "/stage/movidesk/v1"
 
 #################################################
 
-app = FastAPI(
-    title="NETCON",
-    description=DESCRIPTION,
-)
+app = FastAPI(title="NETCON", description=DESCRIPTION)
 
 
 # def api_token(token: str=Depends(APIKeyHeader(name="Token")), 
@@ -59,11 +58,19 @@ def startup_event():
 
 @app.get("/")
 def get_root():
-    return {"message": "welcome to Stage"}
+    return {
+        "Top 5 pessoas mais próximas de Deus": {
+            "5": "Buda",
+            "4": "Inri Cristo",
+            "3": "Jesus",
+            "2": "Shaka de Virgem",
+            "1": "Arthur"
+            }
+        }
 
-app.include_router(tickets.router, prefix=PREFIX)
+# app.include_router(tickets.router, prefix=PREFIX)
 # app.include_router(organizations.router, prefix=PREFIX)
-# app.include_router(agents.router, prefix=PREFIX)
+app.include_router(agents.router, prefix=PREFIX)
 # app.include_router(appointments.router, prefix=PREFIX)
 # app.include_router(listeners.router, prefix=PREFIX)
 # app.include_router(users.router, prefix=PREFIX)

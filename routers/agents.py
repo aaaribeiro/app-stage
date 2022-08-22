@@ -1,28 +1,20 @@
-# imports from third-party libraries
 from typing import List
 
 from fastapi import Depends, APIRouter, HTTPException, status
 from sqlalchemy.orm import Session
 
-# required imports from package models 
-from models.crud import CRUDAgent
-from serializers import schemas
-from auth import auth
+from crud.agent import Agent as CRUDAgent
+from domain.agent import Agent as DomainAgent
+# from auth import auth
+from database.handlers import get_db
 
-# required imports from package utils 
-from utils.handlers import get_db
-
-# constants
-# it will be used in swagger documentation to organize the endpoints
 TAGS = ["agents",]
 
 router = APIRouter()
 
 @router.get(
     "/agents",
-    tags=TAGS,
-    status_code=status.HTTP_200_OK,
-    response_model=List[schemas.Agent],
+    tags=TAGS, status_code=status.HTTP_200_OK, response_model=List[DomainAgent],
     # dependencies=[Depends(auth.api_token)]
 )
 async def read_agents(skip: int = 0, limit: int = 100,
@@ -31,20 +23,18 @@ async def read_agents(skip: int = 0, limit: int = 100,
     return crud.readAgents(db, skip, limit)
 
 
-
 @router.post(
     "/agents",
     tags=TAGS,
     status_code=status.HTTP_201_CREATED, 
     # dependencies=[Depends(auth.api_token)]
 )
-async def create_agent(payload: schemas.Agent, db: Session=Depends(get_db)):
+async def create_agent(payload: DomainAgent, db: Session=Depends(get_db)):
     crud = CRUDAgent()    
     dbAgent = crud.readAgentById(db, payload.ticket_id)  
     if dbAgent:
         raise HTTPException(status_code=400, detail="agent already exists")
     crud.createAgent(db, payload)
-
 
 
 @router.put(
@@ -53,7 +43,7 @@ async def create_agent(payload: schemas.Agent, db: Session=Depends(get_db)):
     status_code=status.HTTP_204_NO_CONTENT,
     # dependencies=[Depends(auth.api_token)],
 )
-async def update_agent(id: int, payload: schemas.Agent, 
+async def update_agent(id: int, payload: DomainAgent, 
                         db: Session = Depends(get_db)):
     crud = CRUDAgent()
     dbAgent = crud.readAgentById(db, id)
@@ -62,7 +52,6 @@ async def update_agent(id: int, payload: schemas.Agent,
     crud.updateAgent(db, payload, dbAgent)  
     
 
-
 @router.delete(
     "/agents/{id}",
     tags=TAGS,
@@ -70,7 +59,6 @@ async def update_agent(id: int, payload: schemas.Agent,
     # dependencies=[Depends(auth.api_token)],
 )
 async def delete_agent(id: int, db: Session = Depends(get_db)):
-
     crud = CRUDAgent()
     dbAgent = crud.readAgentById(db, id)
     if not dbAgent:
