@@ -51,7 +51,7 @@ async def create_agent(payload: DomainAgent, db: Session=Depends(get_db)):
 @router.put(
     "/agents/{id}",
     tags=TAGS,
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_NO_CONTENT,
     # dependencies=[Depends(auth.api_token)],
 )
 async def update_agent(id: str, payload: DomainAgent, 
