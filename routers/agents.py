@@ -48,7 +48,7 @@ async def create_agent(payload: DomainAgent, db: Session=Depends(get_db)):
     CRUD.createAgent(db, payload)
 
 
-@router.put(
+@router.patch(
     "/agents/{id}",
     tags=TAGS,
     status_code=status.HTTP_200_OK,
