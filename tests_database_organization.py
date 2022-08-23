@@ -2,20 +2,20 @@ import unittest
 from database.handlers import DbHandler
 from database.models import Organizations as Model
 from domain.organization import Organization as Domain
-from crud.organizartion import CRUDOrganization as CRUD
+from crud.organization import Organization as CRUD
 
 
 class TestOrgDB(unittest.TestCase):
     
-    def setUp(self) -> None:
+    def setUp(self):
         self._id = 'IDORG001'
         self._name = 'Company Test'
 
 
     def test_a_add_org_db(self):
         with DbHandler() as db:
-            self.org = Domain(id=self._id, name=self._name)
-            self.assertEqual(None, CRUD.createOrganization(db, self.org))
+            self.domain = Domain(id=self._id, name=self._name)
+            self.assertEqual(None, CRUD.createOrganization(db, self.domain))
 
     
     def test_b_read_org_db(self):
@@ -28,8 +28,8 @@ class TestOrgDB(unittest.TestCase):
 
     def test_c_update_org_db(self):
         with DbHandler() as db:
-            self.org = Domain(name='Test Company')
-            self.assertEqual(None, CRUD.updateOrganization(db, self.org, self._id))
+            self.domain = Domain(name='Test Company')
+            self.assertEqual(None, CRUD.updateOrganization(db, self.domain, self._id))
             self.model = CRUD.readOrganizationById(db, self._id)
             self.assertEqual('Test Company', self.model.name)
 

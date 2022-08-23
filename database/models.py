@@ -35,7 +35,7 @@ class Organizations(Base):
     id = Column(String, primary_key=True)
     # cc = Column(String)
     name = Column(String, nullable=False)
-#     # relationships
+    # relationships
 #     tickets = relationship("Tickets", back_populates="organization")
 
 
@@ -60,7 +60,6 @@ class Agents(Base):
 #     time_appointment = Column(Time)
 #     # relationships
 #     agent = relationship("Agents", back_populates="time_appointments")
-
 
 
 # class WebhookLogs(Base):
