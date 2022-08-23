@@ -25,7 +25,7 @@ async def read_agents(skip: int = 0, limit: int = 100,
 
 
 @router.get(
-    "/agent/{id}",
+    "/agents/{id}",
     tags=TAGS,
     status_code=status.HTTP_200_OK,
     response_model=DomainAgent,
