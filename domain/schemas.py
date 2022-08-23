@@ -22,22 +22,22 @@ class Ticket(BaseModel):
         orm_mode = True
 
 
-class Agent(BaseModel):
+# class Agent(BaseModel):
 
-    agent_id: Optional[str]
-    agent_name: Optional[str]
-    agent_team: Optional[str]
+#     agent_id: Optional[str]
+#     agent_name: Optional[str]
+#     agent_team: Optional[str]
 
-    class Config:
-        orm_mode = True
+#     class Config:
+#         orm_mode = True
 
 
-class Organization(BaseModel):
-    organization_id: Optional[str]
-    organization_name: Optional[str]
+# class Organization(BaseModel):
+#     organization_id: Optional[str]
+#     organization_name: Optional[str]
 
-    class Config:
-        orm_mode = True
+#     class Config:
+#         orm_mode = True
 
 
 ################################ ?

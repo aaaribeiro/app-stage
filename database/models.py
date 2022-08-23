@@ -29,12 +29,12 @@ from database.database import Base
 #     agent = relationship("Agents", back_populates="tickets")
 
 
-# class Organizations(Base):
+class Organizations(Base):
 
-#     __tablename__ = "mov_organizations"
-#     organization_id = Column(String, primary_key=True)
-#     # organization_cc = Column(String)
-#     organization_name = Column(String, nullable=False)
+    __tablename__ = "mov_organizations"
+    id = Column(String, primary_key=True)
+    # cc = Column(String)
+    name = Column(String, nullable=False)
 #     # relationships
 #     tickets = relationship("Tickets", back_populates="organization")
 

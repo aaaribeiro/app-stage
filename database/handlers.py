@@ -1,6 +1,6 @@
 from database.database import SessionLocal
 
-# context manager to handle database connections
+
 class DbHandler:
     def __enter__(self):
        self.db = SessionLocal()
@@ -10,7 +10,6 @@ class DbHandler:
         self.db.close()
 
 
-# get_db function that yeilds db for endpoints
 def get_db():
     with DbHandler() as db:
         yield db
