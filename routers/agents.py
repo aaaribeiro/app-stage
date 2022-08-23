@@ -58,7 +58,6 @@ async def update_agent(id: str, payload: Domain,
     if not CRUD.readAgentById(db, id):
         raise HTTPException(status_code=404, detail="agent not found")
     CRUD.updateAgent(db, payload, id)
-    return CRUD.readAgentById(db, id)
     
 
 @router.delete(
