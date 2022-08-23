@@ -4,7 +4,7 @@ from fastapi import Depends, APIRouter, HTTPException, status
 from sqlalchemy.orm import Session
 
 from crud.agent import Agent as CRUD
-from domain.agent import Agent as DomainAgent
+from domain.agent import Agent as Domain
 # from auth import auth
 from database.handlers import get_db
 
@@ -16,7 +16,7 @@ router = APIRouter()
     "/agents",
     tags=TAGS,
     status_code=status.HTTP_200_OK,
-    response_model=List[DomainAgent],
+    response_model=List[Domain],
     # dependencies=[Depends(auth.api_token)]
 )
 async def read_agents(skip: int = 0, limit: int = 100,
@@ -28,7 +28,7 @@ async def read_agents(skip: int = 0, limit: int = 100,
     "/agents/{id}",
     tags=TAGS,
     status_code=status.HTTP_200_OK,
-    response_model=DomainAgent,
+    response_model=Domain,
     # dependencies=[Depends(auth.api_token)]
 )
 async def read_agent(id: str, db:Session=Depends(get_db)):
@@ -41,7 +41,7 @@ async def read_agent(id: str, db:Session=Depends(get_db)):
     status_code=status.HTTP_201_CREATED, 
     # dependencies=[Depends(auth.api_token)]
 )
-async def create_agent(payload: DomainAgent, db: Session=Depends(get_db)): 
+async def create_agent(payload: Domain, db: Session=Depends(get_db)): 
     dbAgent = CRUD.readAgentById(db, payload.id)  
     if dbAgent:
         raise HTTPException(status_code=400, detail="agent already exists")
@@ -54,12 +54,12 @@ async def create_agent(payload: DomainAgent, db: Session=Depends(get_db)):
     status_code=status.HTTP_200_OK,
     # dependencies=[Depends(auth.api_token)],
 )
-async def update_agent(id: str, payload: DomainAgent, 
+async def update_agent(id: str, payload: Domain, 
                         db: Session = Depends(get_db)):
     dbAgent = CRUD.readAgentById(db, id)
     if not dbAgent:
         raise HTTPException(status_code=404, detail="agent not found")
-    CRUD.updateAgent(db, payload, dbAgent)  
+    CRUD.updateAgent(db, payload, id)  
     
 
 @router.delete(
