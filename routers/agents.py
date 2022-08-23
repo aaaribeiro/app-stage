@@ -54,7 +54,7 @@ async def update_agent(id: str, payload: DomainAgent,
 @router.delete(
     "/agents/{id}",
     tags=TAGS,
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
     # dependencies=[Depends(auth.api_token)],
 )
 async def delete_agent(id: str, db: Session = Depends(get_db)):

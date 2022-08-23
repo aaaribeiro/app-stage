@@ -39,7 +39,7 @@ async def create_organization(payload: Domain,
     dbOrganization = CRUD.readOrganizationById(db, payload.id)
     if dbOrganization:
         raise HTTPException(status_code=400, detail="organization already exits")
-    return CRUD.createOrganization(db, payload)
+    CRUD.createOrganization(db, payload)
 
 
 
