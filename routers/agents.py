@@ -41,9 +41,8 @@ async def read_agent(id: str, db:Session=Depends(get_db)):
     status_code=status.HTTP_201_CREATED, 
     # dependencies=[Depends(auth.api_token)]
 )
-async def create_agent(payload: Domain, db: Session=Depends(get_db)): 
-    dbAgent = CRUD.readAgentById(db, payload.id)  
-    if dbAgent:
+async def create_agent(payload: Domain, db: Session=Depends(get_db)):   
+    if CRUD.readAgentById(db, payload.id):
         raise HTTPException(status_code=400, detail="agent already exists")
     CRUD.createAgent(db, payload)
 
@@ -56,10 +55,10 @@ async def create_agent(payload: Domain, db: Session=Depends(get_db)):
 )
 async def update_agent(id: str, payload: Domain, 
                         db: Session = Depends(get_db)):
-    dbAgent = CRUD.readAgentById(db, id)
-    if not dbAgent:
+    if not CRUD.readAgentById(db, id):
         raise HTTPException(status_code=404, detail="agent not found")
-    CRUD.updateAgent(db, payload, id)  
+    CRUD.updateAgent(db, payload, id)
+    return CRUD.readAgentById(db, id)
     
 
 @router.delete(
@@ -69,8 +68,7 @@ async def update_agent(id: str, payload: Domain,
     # dependencies=[Depends(auth.api_token)],
 )
 async def delete_agent(id: str, db: Session = Depends(get_db)):
-    dbAgent = CRUD.readAgentById(db, id)
-    if not dbAgent:
+    if not CRUD.readAgentById(db, id):
         raise HTTPException(status_code=404, detail="agent not found")
     CRUD.deleteAgent(db, id)
     
