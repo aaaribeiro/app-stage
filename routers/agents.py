@@ -43,7 +43,7 @@ async def create_agent(payload: DomainAgent, db: Session=Depends(get_db)):
     status_code=status.HTTP_204_NO_CONTENT,
     # dependencies=[Depends(auth.api_token)],
 )
-async def update_agent(id: int, payload: DomainAgent, 
+async def update_agent(id: str, payload: DomainAgent, 
                         db: Session = Depends(get_db)):
     crud = CRUDAgent()
     dbAgent = crud.readAgentById(db, id)
@@ -58,7 +58,7 @@ async def update_agent(id: int, payload: DomainAgent,
     status_code=status.HTTP_204_NO_CONTENT,
     # dependencies=[Depends(auth.api_token)],
 )
-async def delete_agent(id: int, db: Session = Depends(get_db)):
+async def delete_agent(id: str, db: Session = Depends(get_db)):
     crud = CRUDAgent()
     dbAgent = crud.readAgentById(db, id)
     if not dbAgent:
