@@ -8,7 +8,7 @@ from domain.agent import Agent as DomainAgent
 # from auth import auth
 from database.handlers import get_db
 
-TAGS = ["agents",]
+TAGS = ['agents',]
 
 router = APIRouter()
 
@@ -22,6 +22,17 @@ router = APIRouter()
 async def read_agents(skip: int = 0, limit: int = 100,
                     db:Session=Depends(get_db)):
     return CRUD.readAgents(db, skip, limit)
+
+
+@router.get(
+    "/agent/{id}",
+    tags=TAGS,
+    status_code=status.HTTP_200_OK,
+    response_model=DomainAgent,
+    # dependencies=[Depends(auth.api_token)]
+)
+async def read_agent(id: str, db:Session=Depends(get_db)):
+    return CRUD.readAgentById(db, id)
 
 
 @router.post(
