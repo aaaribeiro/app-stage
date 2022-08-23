@@ -31,7 +31,7 @@ async def read_agents(skip: int = 0, limit: int = 100,
 )
 async def create_agent(payload: DomainAgent, db: Session=Depends(get_db)):
     crud = CRUDAgent()    
-    dbAgent = crud.readAgentById(db, payload.ticket_id)  
+    dbAgent = crud.readAgentById(db, payload.id)  
     if dbAgent:
         raise HTTPException(status_code=400, detail="agent already exists")
     crud.createAgent(db, payload)
