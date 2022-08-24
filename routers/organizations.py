@@ -35,6 +35,8 @@ async def read_organizations(skip: int = 0, limit: int = 100,
     # dependencies=[Depends(auth.api_token)]
 )
 async def read_organization(id: str, db:Session=Depends(get_db)):
+    if not CRUD.readOrganizationById(db, id):
+        raise HTTPException(status_code=404, detail="organization not found")
     return CRUD.readOrganizationById(db, id)
 
 
