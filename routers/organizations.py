@@ -27,6 +27,16 @@ async def read_organizations(skip: int = 0, limit: int = 100,
     return dbOrganizations
 
 
+@router.get(
+    "/organizations/{id}",
+    tags=TAGS,
+    status_code=status.HTTP_200_OK,
+    response_model=Domain,
+    # dependencies=[Depends(auth.api_token)]
+)
+async def read_organization(id: str, db:Session=Depends(get_db)):
+    return CRUD.readOrganizationById(db, id)
+
 
 @router.post(
     "/organizations",
