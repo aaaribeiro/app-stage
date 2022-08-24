@@ -17,6 +17,11 @@ class Organization:
     @classmethod
     def readOrganizationById(self, db: Session, id: str) -> ModelOrg:
         return db.query(ModelOrg).get(id)
+
+
+    @classmethod
+    def readOrganizationById(self, db: Session, id: str) -> ModelOrg:
+        return db.query(ModelOrg).get(id)
        
 
     @classmethod
