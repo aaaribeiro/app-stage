@@ -36,36 +36,33 @@ async def read_organizations(skip: int = 0, limit: int = 100,
 )
 async def create_organization(payload: Domain,
                             db: Session=Depends(get_db)):
-    dbOrganization = CRUD.readOrganizationById(db, payload.id)
-    if dbOrganization:
+    if CRUD.readOrganizationById(db, payload.id):
         raise HTTPException(status_code=400, detail="organization already exits")
     CRUD.createOrganization(db, payload)
 
 
 
-@router.put(
+@router.patch(
     "/organizations/{id}",
     tags=TAGS,
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
     # dependencies=[Depends(auth.api_token)],
 )
-async def update_organization(id: int, payload: Domain, 
+async def update_organization(id: str, payload: Domain, 
                         db: Session = Depends(get_db)):
-    dbOrganization = CRUD.readOrganizationById(db, id)
-    if not dbOrganization:
+    if not CRUD.readOrganizationById(db, id):
         raise HTTPException(status_code=404, detail="organization not found")
-    CRUD.updateOrganization(db, payload, dbOrganization) 
+    CRUD.updateOrganization(db, payload, id) 
 
 
 
 @router.delete(
     "/organizations/{id}",
     tags=TAGS,
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
     # dependencies=[Depends(auth.api_token)],
 )
 async def delete_organization(id: str, db: Session = Depends(get_db)):
-    dbOrganization = CRUD.readOrganizationById(db, id)
-    if not dbOrganization:
+    if not CRUD.readOrganizationById(db, id):
         raise HTTPException(status_code=404, detail="organization not found")
     CRUD.deleteOrganization(db, id)
