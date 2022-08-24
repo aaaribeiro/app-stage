@@ -20,11 +20,6 @@ class Organization:
 
 
     @classmethod
-    def readOrganizationById(self, db: Session, id: str) -> ModelOrg:
-        return db.query(ModelOrg).get(id)
-       
-
-    @classmethod
     def createOrganization(self, db: Session, payload: DomainOrg) -> None:
         dbOrganization = ModelOrg(
             id = payload.id,

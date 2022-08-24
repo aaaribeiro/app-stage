@@ -6,20 +6,20 @@ from typing import Optional, List
 from pydantic import BaseModel
 
 
-class Ticket(BaseModel):
-    ticket_id: Optional[int]
-    organization_id: Optional[str]
-    agent_id: Optional[str]
-    created_date: Optional[datetime]
-    status: Optional[str]
-    category: Optional[str]
-    urgency: Optional[str]
-    subject: Optional[str]
-    sla_solution_date: Optional[datetime]
-    sla_first_response: Optional[datetime]
+# class Ticket(BaseModel):
+#     ticket_id: Optional[int]
+#     organization_id: Optional[str]
+#     agent_id: Optional[str]
+#     created_date: Optional[datetime]
+#     status: Optional[str]
+#     category: Optional[str]
+#     urgency: Optional[str]
+#     subject: Optional[str]
+#     sla_solution_date: Optional[datetime]
+#     sla_first_response: Optional[datetime]
 
-    class Config:
-        orm_mode = True
+#     class Config:
+#         orm_mode = True
 
 
 # class Agent(BaseModel):
@@ -62,21 +62,21 @@ class TimeAppointment(BaseModel):
         orm_mode = True
 
 
-class TicketNestedCompany(BaseModel):
-    ticket_id: Optional[int]
-    organization: Optional[Organization] = None
-    agent: Optional[Agent] = None
-    created_date: Optional[datetime]
-    status: Optional[str]
-    category: Optional[str]
-    urgency: Optional[str]
-    subject: Optional[str]
-    sla_solution_date: Optional[datetime]
-    sla_first_response: Optional[datetime]
-    time_appointments: List[TicketAppointment] = None
+# class TicketNestedCompany(BaseModel):
+#     ticket_id: Optional[int]
+#     organization: Optional[Organization] = None
+#     agent: Optional[Agent] = None
+#     created_date: Optional[datetime]
+#     status: Optional[str]
+#     category: Optional[str]
+#     urgency: Optional[str]
+#     subject: Optional[str]
+#     sla_solution_date: Optional[datetime]
+#     sla_first_response: Optional[datetime]
+#     time_appointments: List[TicketAppointment] = None
 
-    class Config:
-        orm_mode = True
+#     class Config:
+#         orm_mode = True
 
 
 
