@@ -11,6 +11,7 @@ from database.database import engine
 
 from routers import agents
 from routers import organizations
+from routers import tickets
 # from routers import agents, appointments, listeners, organizations, tickets, users
 # from routers import tickets
 # from auth import auth
@@ -63,7 +64,7 @@ def get_root():
             }
         }
 
-# app.include_router(tickets.router, prefix=PREFIX)
+app.include_router(tickets.router, prefix=PREFIX)
 app.include_router(organizations.router, prefix=PREFIX)
 app.include_router(agents.router, prefix=PREFIX)
 # app.include_router(appointments.router, prefix=PREFIX)

@@ -35,9 +35,9 @@ class TicketUpdate(Base):
     """
 
     id: Optional[int]
-    organization: Optional[Organization]
-    agent: Optional[Agent]
-    created_date: datetime
+    org_id: Optional[str]
+    agent_id: Optional[str]
+    created_date: Optional[datetime]
     status: Optional[str]
     category: Optional[str]
     urgency: Optional[str]
