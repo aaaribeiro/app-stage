@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Time, Boolean
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship #, backref
 # from sqlalchemy_utils import EmailType, PasswordType
 from database.database import Base
@@ -7,8 +7,8 @@ from database.database import Base
 class Tickets(Base):
     
     __tablename__ = "mov_tickets"
-    ticket_id = Column(Integer, primary_key=True)
-    organization_id = Column(String, ForeignKey("mov_organizations.id"))
+    id = Column(Integer, primary_key=True)
+    org_id = Column(String, ForeignKey("mov_organizations.id"))
     agent_id = Column(String, ForeignKey("mov_agents.id"))
     created_date = Column(DateTime)
     status = Column(String)
@@ -43,11 +43,6 @@ class Agents(Base):
     # relationships
     tickets = relationship("Tickets", back_populates="agent")
     # time_appointments = relationship("TimeAppointments", back_populates="agent")
-
-    def _get_attrs(self):
-        return [attr for attr in dir(self) if not attr.startswith('_')
-            and attr not in ('registry', 'metadata')]
-
 
 
 # class TimeAppointments(Base):

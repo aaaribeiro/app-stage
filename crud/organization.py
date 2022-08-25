@@ -21,10 +21,9 @@ class Organization:
 
     @classmethod
     def createOrganization(self, db: Session, payload: DomainOrg) -> None:
-        dbOrganization = ModelOrg(
-            id = payload.id,
-            name = payload.name
-            )
+        dbOrganization = ModelOrg()
+        for attr in payload.fields_set():
+            setattr(dbOrganization, attr, getattr(payload, attr))
         db.add(dbOrganization)
         db.commit()
 
@@ -33,8 +32,8 @@ class Organization:
     def updateOrganization(self, db: Session, payload: DomainOrg,
                             id: str) -> None:
         dbOrganization = self.readOrganizationById(db, id)
-        if payload.name is not None:
-            dbOrganization.name = payload.name
+        for attr in payload.fields_set():
+            setattr(dbOrganization, attr, getattr(payload, attr))
         db.commit()
 
 

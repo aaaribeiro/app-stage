@@ -1,11 +1,11 @@
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel
+from domain.base import Base
 from domain.organization import Organization
 from domain.agent import Agent
 
 
-class TicketCreation(BaseModel):
+class TicketCreation(Base):
 
     """
     Class used as reference to create new tickets.
@@ -13,8 +13,8 @@ class TicketCreation(BaseModel):
     """
 
     id: int
-    organization: Organization
-    agent: Optional[Agent]
+    org_id: str
+    agent_id: str
     created_date: datetime
     status: Optional[str]
     category: Optional[str]
@@ -27,7 +27,7 @@ class TicketCreation(BaseModel):
         orm_mode = True
 
 
-class TicketUpdate(BaseModel):
+class TicketUpdate(Base):
 
     """
     Class used as reference to update existing tickets.

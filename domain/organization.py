@@ -1,8 +1,8 @@
 from typing import Optional
-from pydantic import BaseModel
+from domain.base import Base
 
 
-class Organization(BaseModel):
+class Organization(Base):
     id: Optional[str]
     name: Optional[str]
 

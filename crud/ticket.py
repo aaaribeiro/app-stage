@@ -26,31 +26,10 @@ class Ticket:
        
 
     @classmethod
-    def createTicket(self, db: Session, payload: DomainTicketCreation) -> None:
-        """
-        id: int
-        organization: Organization
-        agent: Optional[Agent]
-        created_date: datetime
-        status: Optional[str]
-        category: Optional[str]
-        urgency: Optional[str]
-        subject: Optional[str]
-        sla_solution_date: Optional[datetime]
-        sla_first_response: Optional[datetime]
-        """
-        
-        dbTicket = ModelTicket(
-            id = payload.id,
-            organization = payload.organization,
-            created_date = payload.created_date,
-            status = payload.status,
-            category = payload.category,
-            urgency = payload.category,
-            subject = payload.subject,
-            sla_solution_date = payload.sla_solution_date,
-            sla_first_response = payload.sla_first_response
-            )
+    def createTicket(self, db: Session, payload: DomainTicketCreation) -> None:        
+        dbTicket = ModelTicket()
+        for attr in payload.fields_set():
+            setattr(dbTicket, attr, getattr(payload, attr))
         db.add(dbTicket)
         db.commit()
 
@@ -59,8 +38,8 @@ class Ticket:
     def updateTicket(self, db: Session, payload: DomainTicketUpdate,
                             id: str) -> None:
         dbTicket = self.readTicketById(db, id)
-        if payload.name is not None:
-            dbTicket.name = payload.name
+        for attr in payload.fields_set():
+            setattr(dbTicket, attr, getattr(payload, attr))
         db.commit()
 
 

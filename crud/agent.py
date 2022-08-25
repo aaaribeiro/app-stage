@@ -21,11 +21,9 @@ class Agent:
 
     @classmethod
     def createAgent(self, db: Session, payload: DomainAgent) -> None:
-        dbAgent = ModelAgent(
-            id = payload.id,
-            name = payload.name,
-            team = payload.team,
-        )
+        dbAgent = ModelAgent()
+        for attr in payload.fields_set():
+            setattr(dbAgent, attr, getattr(payload, attr))
         db.add(dbAgent)
         db.commit()
 
@@ -34,19 +32,9 @@ class Agent:
     def updateAgent(self, db: Session, payload: DomainAgent,
                     id: str) -> None:
         dbAgent = self.readAgentById(db, id)
-        if payload.name is not None:
-            dbAgent.name = payload.name
-        if payload.team is not None:
-            dbAgent.team = payload.team
+        for attr in payload.fields_set():
+            setattr(dbAgent, attr, getattr(payload, attr))
         db.commit()
-
-
-    # @classmethod
-    # def updateAgent(self, db: Session, payload: DomainAgent,
-    #                 dbAgent: ModelAgent) -> None:
-    #     dbAgent.name = payload.name
-    #     dbAgent.team = payload.team
-    #     db.commit()
 
 
     @classmethod
