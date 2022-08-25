@@ -12,18 +12,25 @@ from database.database import engine
 from routers import agents
 from routers import organizations
 from routers import tickets
+from routers import timeAppointments 
 # from routers import agents, appointments, listeners, organizations, tickets, users
 # from routers import tickets
 # from auth import auth
 
 ################## constants ####################
 DESCRIPTION = """
+\t -> Top 5 pessoas mais próximas de Deus: \n
+\t\t\t 5: Buda \n
+\t\t\t 4: Inri Cristo \n
+\t\t\t 3: Jesus \n
+\t\t\t 2: Shaka de Virgem \n
+\t\t\t 1: Arthur \n
 """
 PREFIX = "/stage/movidesk/v1"
 
 #################################################
 
-app = FastAPI(title="NETCON", description=DESCRIPTION)
+app = FastAPI(title="Movidesk Stage", description=DESCRIPTION)
 
 
 # def api_token(token: str=Depends(APIKeyHeader(name="Token")), 
@@ -67,6 +74,6 @@ def get_root():
 app.include_router(tickets.router, prefix=PREFIX)
 app.include_router(organizations.router, prefix=PREFIX)
 app.include_router(agents.router, prefix=PREFIX)
-# app.include_router(appointments.router, prefix=PREFIX)
+app.include_router(timeAppointments.router, prefix=PREFIX)
 # app.include_router(listeners.router, prefix=PREFIX)
 # app.include_router(users.router, prefix=PREFIX)

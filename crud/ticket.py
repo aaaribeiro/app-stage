@@ -16,12 +16,7 @@ class Ticket:
 
 
     @classmethod
-    def readTicketById(self, db: Session, id: str) -> ModelTicket:
-        return db.query(ModelTicket).get(id)
-
-
-    @classmethod
-    def readTicketById(self, db: Session, id: str) -> ModelTicket:
+    def readTicketById(self, db: Session, id: int) -> ModelTicket:
         return db.query(ModelTicket).get(id)
        
 

@@ -1,9 +1,5 @@
 import unittest
 import requests
-from database.handlers import DbHandler
-from database.models import Organizations as Model
-from domain.organization import Organization as Domain
-from crud.organization import Organization as CRUD
 
 
 class TestAgentAPI(unittest.TestCase):

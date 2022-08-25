@@ -37,14 +37,14 @@ class TestTicketDB(unittest.TestCase):
         )
 
         self.domain_ticket = DomainCreation(
-        id = 1,
-        org_id = 'ORG001',
-        agent_id = 'AGT001',
-        created_date = datetime.now(),
-        status = 'NEW',
-        category = 'HELP REQUEST',
-        urgency = 'B-HIGH',
-        subject = 'TTCKET TEST' 
+            id = 1,
+            org_id = 'ORG001',
+            agent_id = 'AGT001',
+            created_date = datetime.now(),
+            status = 'NEW',
+            category = 'HELP REQUEST',
+            urgency = 'B-HIGH',
+            subject = 'TTCKET TEST' 
         )
 
 

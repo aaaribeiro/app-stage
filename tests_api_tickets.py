@@ -1,10 +1,6 @@
 import unittest
 import requests
 from datetime import datetime
-from database.handlers import DbHandler
-from database.models import Organizations as Model
-from domain.organization import Organization as Domain
-from crud.organization import Organization as CRUD
 
 
 class TestTickettAPI(unittest.TestCase):
@@ -80,7 +76,7 @@ class TestTickettAPI(unittest.TestCase):
         response = requests.get(f"{self.url}/tickets/{self.ticket_request_body['id']}")
         self.assertEqual(200, response.status_code)
         self.assertEqual(self.ticket_request_body, response.json())
-        response = requests.get(f"{self.url}/99999")
+        response = requests.get(f"{self.url}/tickets/99999")
         self.assertEqual(response.status_code, 404)
     
 
