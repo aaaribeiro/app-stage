@@ -9,10 +9,11 @@ from crud.organization import Organization as CRUD
 class TestAgentAPI(unittest.TestCase):
     
     def setUp(self):
-        self.url = 'https://app-stage-netcon.herokuapp.com/stage/movidesk/v1/organizations'
+        # self.url = 'https://app-stage-netcon.herokuapp.com/stage/movidesk/v1/organizations'
+        self.url = 'http://localhost:8000/stage/movidesk/v1/organizations'
         self.request_body = {
-            'id': 'IDORG001',
-            'name': 'Test Company'
+            'id': 'ORG001',
+            'name': 'ORG TEST'
         }
 
 
@@ -31,19 +32,13 @@ class TestAgentAPI(unittest.TestCase):
     
 
     def test_c_update_org_db(self):
-        payload = {
-            'name': 'Company Test'
-        }
-        response_expected = {
-            'id': 'IDORG001',
-            'name': 'Company Test'
-        }
+        payload = {'name': 'ORG UP-TO-DATE'}
         response = requests.patch(f"{self.url}/{self.request_body['id']}",
                                 json=payload)
         self.assertEqual(200, response.status_code)
         self.assertEqual(None, response.json())
         response = requests.get(f"{self.url}/{self.request_body['id']}")
-        self.assertEqual(response_expected, response.json())
+        self.assertEqual(payload["name"], response.json()["name"])
 
 
     def test_d_delete_org_api(self):

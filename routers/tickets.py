@@ -6,6 +6,9 @@ from crud.ticket import Ticket as CRUD
 from domain.ticket import TicketCreation as DomainCreation
 from domain.ticket import TicketUpdate as DomainUpdate
 
+from crud.organization import Organization as CRUDOrg
+from crud.agent import Agent as CRUDAgent
+
 from database.handlers import get_db
 
 # authentication
@@ -60,10 +63,18 @@ async def create_ticket(payload: DomainCreation,
     status_code=status.HTTP_200_OK,
     # dependencies=[Depends(auth.api_token)],
 )
-async def update_ticket(id: str, payload: DomainCreation, 
+async def update_ticket(id: str, payload: DomainUpdate, 
                         db: Session = Depends(get_db)):
     if not CRUD.readTicketById(db, id):
         raise HTTPException(status_code=404, detail="ticket not found")
+
+    if 'org_id' in [k for k, v in payload.dict().items() if v is not None]:
+        if not CRUDOrg.readOrganizationById(db, payload.org_id):
+            raise HTTPException(status_code=404, detail="organization not found")
+    elif 'agent_id' in [k for k, v in payload.dict().items() if v is not None]:
+        if not CRUDAgent.readAgentById(db, payload.agent_id):
+            raise HTTPException(status_code=404, detail="agent not found")
+
     CRUD.updateTicket(db, payload, id) 
 
 

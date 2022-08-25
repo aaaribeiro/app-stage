@@ -11,7 +11,7 @@ from crud.agent import Agent as CRUDAgent
 from crud.organization import Organization as CRUDOrg
 
 
-class TestAgentDB(unittest.TestCase):
+class TestTicketDB(unittest.TestCase):
     
     def setUp(self):
         self.domain_org = DomainOrg(

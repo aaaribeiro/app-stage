@@ -9,11 +9,12 @@ from crud.agent import Agent as CRUD
 class TestAgentAPI(unittest.TestCase):
     
     def setUp(self):
-        self.url = 'https://app-stage-netcon.herokuapp.com/stage/movidesk/v1/agents'
+        # self.url = 'https://app-stage-netcon.herokuapp.com/stage/movidesk/v1/agents'
+        self.url = 'http://localhost:8000/stage/movidesk/v1/agents'
         self.request_body = {
-            'id': 'IDORG001',
-            'name': 'Agent Test',
-            'team': 'BR-TEST'
+            'id': 'AGT001',
+            'name': 'AGENT TEST',
+            'team': 'BSS'
         }
 
 
@@ -32,20 +33,13 @@ class TestAgentAPI(unittest.TestCase):
     
 
     def test_c_update_agent_db(self):
-        payload = {
-            'name': 'Test Agent'
-        }
-        response_expected = {
-            'id': 'IDORG001',
-            'name': 'Test Agent',
-            'team': 'BR-TEST'
-        }
+        payload = {'name': 'AGENT UP-TO-DATE'}
         response = requests.patch(f"{self.url}/{self.request_body['id']}",
                                 json=payload)
         self.assertEqual(200, response.status_code)
         self.assertEqual(None, response.json())
         response = requests.get(f"{self.url}/{self.request_body['id']}")
-        self.assertEqual(response_expected, response.json())
+        self.assertEqual(payload['name'], response.json()['name'])
 
 
     def test_d_delete_agent_api(self):
