@@ -1,8 +1,10 @@
-from fastapi import FastAPI #, Depends, HTTPException, status ,Form
+from urllib.request import Request
+from fastapi import FastAPI, Request #, Depends, HTTPException, status ,Form
 # from fastapi.security import APIKeyHeader
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 from app.database import models
 from app.database.database import engine
-
 from app.routers import routerAgents
 from app.routers import routerOrganizations
 from app.routers import routerTickets
@@ -23,6 +25,7 @@ PREFIX = "/stage/movidesk/v1"
 #################################################
 
 app = FastAPI(title="Movidesk Stage", description=DESCRIPTION)
+templates = Jinja2Templates(directory="template")
 
 
 # def api_token(token: str=Depends(APIKeyHeader(name="Token")), 
@@ -51,17 +54,18 @@ def startup_event():
     # return {"hello": "world"}
 
 
-@app.get("/")
-def get_root():
-    return {
-        "Top 5 pessoas mais próximas de Deus": {
-            "5": "Buda",
-            "4": "Inri Cristo",
-            "3": "Jesus",
-            "2": "Shaka de Virgem",
-            "1": "Arthur"
-            }
-        }
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
+    # return {
+    #     "Top 5 pessoas mais próximas de Deus": {
+    #         "5": "Buda",
+    #         "4": "Inri Cristo",
+    #         "3": "Jesus",
+    #         "2": "Shaka de Virgem",
+    #         "1": "Arthur"
+    #         }
+    #     }
 
 app.include_router(routerTickets.router, prefix=PREFIX)
 app.include_router(routerOrganizations.router, prefix=PREFIX)
