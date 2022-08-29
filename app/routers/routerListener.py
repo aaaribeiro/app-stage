@@ -14,8 +14,8 @@ from app.database.dbHandlers import get_db
 from json import JSONDecodeError
 # from auth import auth
 
-try: TOKEN = os.environ['TOKEN']
-except KeyError: TOKEN = '27d95ace-819c-43d8-bb93-5c39dbf5edbd'
+# TOKEN = os.environ['TOKEN']
+TOKEN = ''
 TAGS = ["listener",]
 router = APIRouter()
 
