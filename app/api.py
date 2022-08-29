@@ -55,7 +55,7 @@ def home(request: Request):
 
 @app.get('/logo/netcon', response_class=FileResponse)
 def get_logo():
-    return '.\\static\\images\\net-logo.png'
+    return './static/images/net-logo.png'
 
 
 app.include_router(routerTickets.router, prefix=PREFIX)
