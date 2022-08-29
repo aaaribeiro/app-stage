@@ -29,7 +29,7 @@ class CrudTicket:
 
     @classmethod
     def updateTicket(self, db: Session, payload: DomainTicket,
-                            id: str) -> None:
+                            id: int) -> None:
         dbTicket = self.readTicketById(db, id)
         for attr in payload.fields_set():
             setattr(dbTicket, attr, getattr(payload, attr))
@@ -37,7 +37,7 @@ class CrudTicket:
 
 
     @classmethod
-    def deleteTicket(self, db: Session, id: str) -> None:
+    def deleteTicket(self, db: Session, id: int) -> None:
         dbTicket = self.readTicketById(db, id)
         db.delete(dbTicket)
         db.commit()

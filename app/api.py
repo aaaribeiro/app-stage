@@ -1,4 +1,3 @@
-from urllib.request import Request
 from fastapi import FastAPI, Request #, Depends, HTTPException, status ,Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
