@@ -1,9 +1,18 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <style>
+  .row {
+    display: flex;
+  }
+
+  .column {
+    flex: 50%;
+  }
+    </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>NETCON MOVIDESK STAGE</title>
+    <title>Netcon Americas</title>
 </head>
 <body>  
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -13,19 +22,19 @@
     <div class="container-fluid">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="/">HOME</a>
+          <a class="nav-link active" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/solicitante/lista">DATABASE</a>
+          <a class="nav-link" href="#">Database</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/emprestimo/lista">MODEL</a>
+          <a class="nav-link" href="#">Model</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/livrofisico/lista">DOMAIN</a>
+          <a class="nav-link" href="#">Domain</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/livrodigital/lista">ROUTES</a>
+          <a class="nav-link" href="#">Routes</a>
         </li>
         <!--li class="nav-item">
           <a class="nav-link" href="/livroaudio/lista">Livro Audio</a>
@@ -35,64 +44,64 @@
   </nav>
 </div> 
     <div class="container mt-3">
-      <h2>NETCON MOVIDESK STAGE</h2>
-      <p>STAGE AREA PROJECT FOR OPERATIONS DEPARTMENT AT NETCON</p>
-      
-      <h3>MODELS</h3>
-      <table class="table table-sm" style="table-layout: fixed; width: 100%">
-        <thead class="table-warning">
-          <tr>
-            <th>MODEL</th>
-            <th>TABLE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>dataInicio</td>
-            <td>LocalDate</td>
-          </tr>
-          <tr>
-            <td>dataDevolucao</td>
-            <td>LocalDate</td>
-          </tr>
-          <tr>
-            <td>atraso</td>
-            <td>boolean</td>
-          </tr>
-        </tbody>
-      </table>
+      <h2>Netcon stage area for movidesk</h2>
+      <p>Stage area project for operations department at Netcon</p>
 
-      <br>
+      <div class="row">
+        <div class="column">
+          <h3>Models</h3>
+          <table class="table table-sm" style="width: 100%">
+            <thead class="table-warning">
+              <tr>
+                <th>Model</th>
+                <th>Table</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>dataInicio</td>
+                <td>LocalDate</td>
+              </tr>
+              <tr>
+                <td>dataDevolucao</td>
+                <td>LocalDate</td>
+              </tr>
+              <tr>
+                <td>atraso</td>
+                <td>boolean</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <!--h3>Classe: Solicitante</h3>
-      <table class="table table-sm" style="table-layout: fixed; width: 100%">
-        <thead class="table-warning">
-          <tr>
-            <th>Atributo</th>
-            <th>Tipo</th>
-            <th>Descrição</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>nome</td>
-            <td>String</td>
-            <td>Nome do solicitante do empréstimo</td>
-          </tr>
-          <tr>
-            <td>cpf</td>
-            <td>String</td>
-            <td>CPF do solicitante do empréstimo</td>
-          </tr>
-          <tr>
-            <td>email</td>
-            <td>String</td>
-            <td>Email do solicitante do empréstimo</td>
-          </tr>
-        </tbody>
-      </table>
+        <div class="column">
+          <h3>Domain</h3>
+          <table class="table table-sm" style="width: 100%">
+            <thead class="table-warning">
+              <tr>
+                <th>Atributo</th>
+                <th>Tipo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>nome</td>
+                <td>String</td>
+              </tr>
+              <tr>
+                <td>cpf</td>
+                <td>String</td>
+              </tr>
+              <tr>
+                <td>email</td>
+                <td>String</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-      <br>
+      <!--br>
 
       <h3>Classe: Livro</h3> 
       <table class="table table-sm" style="table-layout: fixed; width: 100%">
